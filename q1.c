@@ -36,14 +36,41 @@ int main (int argc, char *argv[]){
 }
 
 int findMax(void *input_ints) {
-	printf("bik is gay");	
-	return 69;
+	int max=0;
+	int *ptr = (int *)input_ints;
+
+	while(*ptr != '\0'){
+		if(*ptr > max){
+			max = *ptr;
+		}
+		ptr++;
+	}
+	return max;
 }
 
 int findMin(void *input_ints) {
+	int *ptr = (int *)input_ints;
+	int min = *ptr;
 
+	while(*ptr != '\0'){
+		if(*ptr < min){
+			min = *ptr;
+		}
+		ptr++;
+	}
+	return min;
 }
 
-int findAvg(void *input_ints) {
 
+int findAvg(void *input_ints) {
+	int *ptr = (int *)input_ints;
+	int sum=0;
+	int temp;
+
+	while(*ptr != '\0'){
+		sum += *ptr;
+		temp++;
+		ptr++;
+	}
+	return (sum/n);
 }
