@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <stdint.h>
 
 int findMin(void *input_ints);
 int findMax(void *input_ints);
@@ -17,8 +18,8 @@ int main (int argc, char *argv[]){
 	
 
 	for(int x = 1; x< argc; x++){
-		inputArr[x] = atoi(argv[x]);gcc
-		//printf("%d \n", inputArr[x]);
+		inputArr[x-1] = atoi(argv[x]);
+		
 	}
 
 	pthread_t maxThread, minThread, avgThread;
@@ -30,7 +31,7 @@ int main (int argc, char *argv[]){
 	pthread_join(minThread, &min);
 	pthread_join(avgThread, &avg);
 
-	printf("%d, %d, %d", min, max, avg);
+	printf("\nThe Average Value is: %ld \nThe Minimum Value is: %ld \nThe Maximum Value is: %ld \n\n", (uintptr_t)avg, (uintptr_t)min, (uintptr_t)max);
 	
 	return 0;
 }
@@ -45,6 +46,7 @@ int findMax(void *input_ints) {
 		}
 		ptr++;
 	}
+	
 	return max;
 }
 
@@ -65,12 +67,12 @@ int findMin(void *input_ints) {
 int findAvg(void *input_ints) {
 	int *ptr = (int *)input_ints;
 	int sum=0;
-	int temp;
+	int temp=0;
 
 	while(*ptr != '\0'){
 		sum += *ptr;
 		temp++;
 		ptr++;
 	}
-	return (sum/n);
+	return (sum/temp);
 }
